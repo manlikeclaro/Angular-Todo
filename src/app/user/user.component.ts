@@ -1,9 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
 import {DUMMY_USERS} from "../dummy-users";
-
-const getRandomUser = (): number => {
-  return Math.floor(Math.random() * DUMMY_USERS.length);
-}
 
 @Component({
   selector: 'app-user',
@@ -13,10 +9,18 @@ const getRandomUser = (): number => {
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  selectedUser = DUMMY_USERS[getRandomUser()]
+  @Input({required: true}) avatar!: string;
+  @Input({required: true}) name!: string;
+  @Input({required: true}) id!: string;
 
-  get Avatar() {
-    return `assets/users/${this.selectedUser.avatar}`;
+  @Output() select = new EventEmitter();
+
+  getAvatar() {
+    return `assets/users/${this.avatar}`;
+  }
+
+  handleClick = () => {
+    this.select.emit(this.id);
   }
 
 }
