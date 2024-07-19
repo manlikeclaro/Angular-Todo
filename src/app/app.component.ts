@@ -1,23 +1,31 @@
 import {Component} from '@angular/core';
 import {HeaderComponent} from "./header/header.component";
 import {UserComponent} from "./user/user.component";
-import {DUMMY_USERS} from "./dummy-users";
+import {DummyUsers} from "../shared/dummy-users";
+import {TasksComponent} from "./tasks/tasks.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     HeaderComponent,
-    UserComponent
+    UserComponent,
+    TasksComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  users = DUMMY_USERS;
+  users = DummyUsers;
+  // selectedUserId = this.users[Math.floor(Math.random() * this.users.length)].id;
+  identifiedUser?: {};
 
-  onSelectUser = (id: string) => {
-    console.log(`User selected: ${id}`);
+  get selectedUser() {
+    return this.users.find(user => this.identifiedUser === user)
+  }
+
+  onSelectUser = (obj: {}) => {
+    return this.identifiedUser = obj;
   }
 
 }

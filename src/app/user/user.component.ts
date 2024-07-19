@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
-import {DUMMY_USERS} from "../dummy-users";
+import {DummyUsers} from "../../shared/dummy-users";
+import {User} from "../../shared/user.model";
 
 @Component({
   selector: 'app-user',
@@ -9,18 +10,16 @@ import {DUMMY_USERS} from "../dummy-users";
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  @Input({required: true}) avatar!: string;
-  @Input({required: true}) name!: string;
-  @Input({required: true}) id!: string;
+  @Input({required: true}) user!: User;
 
-  @Output() select = new EventEmitter();
+  @Output() select = new EventEmitter<object>();
 
   getAvatar() {
-    return `assets/users/${this.avatar}`;
+    return `assets/users/${this.user.avatar}`;
   }
 
   handleClick = () => {
-    this.select.emit(this.id);
+    this.select.emit(this.user);
   }
 
 }
