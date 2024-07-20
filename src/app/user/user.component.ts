@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
-import {DummyUsers} from "../../shared/dummy-users";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {User} from "../../shared/user.model";
 
 @Component({
@@ -11,6 +10,7 @@ import {User} from "../../shared/user.model";
 })
 export class UserComponent {
   @Input({required: true}) user!: User;
+  @Input({required: true}) selected!: boolean;
 
   @Output() select = new EventEmitter<object>();
 

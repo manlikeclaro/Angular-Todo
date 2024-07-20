@@ -17,8 +17,9 @@ import {TasksComponent} from "./tasks/tasks.component";
 })
 export class AppComponent {
   users = DummyUsers;
-  // selectedUserId = this.users[Math.floor(Math.random() * this.users.length)].id;
   identifiedUser?: {};
+
+  // identifiedUser?: {} = this.users[Math.floor(Math.random() * this.users.length)];
 
   get selectedUser() {
     return this.users.find(user => this.identifiedUser === user)
