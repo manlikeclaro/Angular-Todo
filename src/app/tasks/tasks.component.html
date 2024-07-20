@@ -1,0 +1,20 @@
+<section class="container">
+  <header class="d-flex justify-content-between align-items-center mb-4">
+    <h2>{{ user.name }}'s Tasks</h2>
+    <menu>
+      <button class="btn btn-primary">Add Task</button>
+    </menu>
+  </header>
+
+  <ul class="list-group">
+    @for (task of selectedUserTasks; track task.id) {
+      @if (selectedUserTasks.length) {
+        <li class="list-group-item bg-dark">
+          <app-task [task]="task"/>
+        </li>
+      } @else {
+        <h2>{{user.name}} has no tasks</h2>
+      }
+    }
+  </ul>
+</section>
