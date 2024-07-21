@@ -1,26 +1,21 @@
-<app-header></app-header>
+<app-header/>
 
-<div class="container py-5">
-  <div class="row">
-    <div class="col-4">
-      <ul id="users" class="list-unstyled">
-        @for (user of users; track user.id) {
-          <li class="mb-3">
-            <app-user
-              [user]="user"
-              (select)="onSelectUser($event)"
-              [selected]="user == selectedUser">
-            </app-user>
-          </li>
-        }
-      </ul>
-    </div>
-    <div class="col-8">
-      @if (selectedUser != undefined) {
-        <app-tasks [user]="selectedUser!"/>
-      } @else {
-        <h2>Select a user to view their tasks :)</h2>
-      }
-    </div>
-  </div>
-</div>
+<main>
+  <ul id="users">
+    @for (user of users; track user.id) {
+      <li class="mb-3">
+        <app-user
+          [user]="user"
+          (select)="onSelectUser($event)"
+          [selected]="user == selectedUser">
+        </app-user>
+      </li>
+    }
+  </ul>
+
+  @if (selectedUser != undefined) {
+    <app-tasks [user]="selectedUser!"/>
+  } @else {
+    <h2 id="fallback">Select a user to view their tasks :)</h2>
+  }
+</main>
