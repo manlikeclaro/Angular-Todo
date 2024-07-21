@@ -22,5 +22,8 @@ export class TasksComponent {
     return this.tasks.filter(task => task.userId === this.user.id);
   }
 
+  handleCompletedTask = (obj:object) => {
+    this.tasks = this.tasks.filter(task => task !== obj);
+  }
 
 }

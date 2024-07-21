@@ -4,7 +4,7 @@
     <time class="card-text">{{ task.dueDate }}</time>
     <p class="card-text">{{ task.summary }}</p>
     <p>
-      <button class="btn btn-success">Complete</button>
+      <button class="btn btn-success" (click)="handleClick()">Complete</button>
     </p>
   </div>
 </article>
