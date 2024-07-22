@@ -18,26 +18,34 @@ import {Task} from "../../shared/task.model";
 export class TasksComponent {
   @Input({required: true}) user!: User;
   newTaskCreate = false;
-
   tasks = DummyTasks;
 
+  // Method to get tasks for the selected user
   get selectedUserTasks() {
     return this.tasks.filter(task => task.userId === this.user.id);
   }
 
+  // Method to handle completed task removal
   handleCompletedTask = (obj: object) => {
     this.tasks = this.tasks.filter(task => task !== obj);
   }
 
+  // Method to toggle task creation state
   handleTaskCreation = () => {
     this.newTaskCreate = !this.newTaskCreate;
   }
 
-  handleNewTask = (obj: Task) => {
-    obj.id = `task-${99}`;
-    obj.userId = this.user.id;
-    this.tasks.push(obj)
-    this.handleTaskCreation()
+  // Method to generate a new task ID
+  newTaskId = () => {
+    return `task-${this.tasks.length + 1}`;
   }
 
+  // Method to handle new task addition
+  handleNewTask = (obj: Task) => {
+    obj.id = this.newTaskId();
+    obj.userId = this.user.id;
+    console.log(obj);
+    this.tasks.push(obj);
+    this.handleTaskCreation();
+  }
 }

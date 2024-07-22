@@ -17,10 +17,12 @@ export class NewTaskComponent {
 
   enteredTask = new Task('', '', '', '', '');
 
+  // Method to handle click event and emit finished event
   handleClick = () => {
     this.finished.emit();
   }
 
+  // Method to handle form submission and emit added event
   handleSubmit = (obj: Task) => {
     this.added.emit(obj);
   }
