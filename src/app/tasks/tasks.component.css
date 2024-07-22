@@ -1,7 +1,7 @@
 #tasks {
   padding: 1rem;
   border-radius: 8px;
-  max-height: 60dvh;
+  max-height: 80%; /* Bootstrap uses vh units */
   overflow: auto;
   background-color: #3a2c54;
   color: #c3b3d8;
@@ -19,7 +19,7 @@ h2 {
   margin: 0;
   font-size: 0.9rem;
   width: 60%;
-  text-wrap: balance;
+  word-wrap: break-word; /* Using word-wrap for text balancing */
 }
 
 menu {
@@ -39,7 +39,7 @@ menu button {
 
 menu button:hover,
 menu button:active {
-  background-color: #a565dd
+  background-color: #a565dd;
 }
 
 ul {
@@ -49,8 +49,26 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-height: 80dvh;
+  /*max-height: 60vh; !* Bootstrap uses vh units *!*/
   overflow: auto;
+}
+
+/* Custom scrollbar styles */
+#tasks::-webkit-scrollbar,
+ul::-webkit-scrollbar {
+  width: 10px;
+}
+
+#tasks::-webkit-scrollbar-track,
+ul::-webkit-scrollbar-track {
+  background: #3a2c54;
+}
+
+#tasks::-webkit-scrollbar-thumb,
+ul::-webkit-scrollbar-thumb {
+  background-color: #9965dd;
+  border-radius: 10px;
+  border: 3px solid #3a2c54;
 }
 
 @media (min-width: 768px) {

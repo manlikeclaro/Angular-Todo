@@ -1,5 +1,5 @@
-@if (newTaskCreateion) {
-  <app-new-task (finished)="handleTaskCreation()"/>
+@if (newTaskCreate) {
+  <app-new-task (finished)="handleTaskCreation()" (added)="handleNewTask($event)"/>
 }
 
 <section id="tasks">
@@ -13,9 +13,8 @@
   <ul>
     @for (task of selectedUserTasks; track task.id) {
       <li>
-        <app-task [task]="task" (complete)="handleCompletedTask($event)"/>
+        <app-task [task]="task" (complete)="handleCompletedTask($event) "></app-task>
       </li>
     }
   </ul>
 </section>
-

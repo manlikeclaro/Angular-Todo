@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {User, UserInterface} from "../../shared/user.model";
+import {User} from "../../shared/user.model";
 import {TaskComponent} from "./task/task.component";
 import {DummyTasks} from "../../shared/dummy-tasks";
-import {DummyUsers} from "../../shared/dummy-users";
 import {NewTaskComponent} from "./new-task/new-task.component";
+import {Task} from "../../shared/task.model";
 
 @Component({
   selector: 'app-tasks',
@@ -17,7 +17,7 @@ import {NewTaskComponent} from "./new-task/new-task.component";
 })
 export class TasksComponent {
   @Input({required: true}) user!: User;
-  newTaskCreateion = false;
+  newTaskCreate = false;
 
   tasks = DummyTasks;
 
@@ -25,12 +25,19 @@ export class TasksComponent {
     return this.tasks.filter(task => task.userId === this.user.id);
   }
 
-  handleCompletedTask = (obj:object) => {
+  handleCompletedTask = (obj: object) => {
     this.tasks = this.tasks.filter(task => task !== obj);
   }
 
   handleTaskCreation = () => {
-    this.newTaskCreateion = !this.newTaskCreateion;
+    this.newTaskCreate = !this.newTaskCreate;
+  }
+
+  handleNewTask = (obj: Task) => {
+    obj.id = `task-${99}`;
+    obj.userId = this.user.id;
+    this.tasks.push(obj)
+    this.handleTaskCreation()
   }
 
 }
