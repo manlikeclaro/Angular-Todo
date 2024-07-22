@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../../shared/user.model";
 import {TaskComponent} from "./task/task.component";
 import {DummyTasks} from "../../shared/dummy-tasks";
@@ -15,10 +15,18 @@ import {Task} from "../../shared/task.model";
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
   @Input({required: true}) user!: User;
   newTaskCreate = false;
-  tasks = DummyTasks;
+  // tasks = DummyTasks;
+
+  // Array to store the list of tasks
+  tasks: Task[] = [];
+
+  // Lifecycle hook to perform component initialization
+  ngOnInit(): void {
+    this.loadTasks() // Load tasks from local storage or initialize with dummy tasks
+  }
 
   // Method to get tasks for the selected user
   get selectedUserTasks() {
@@ -47,5 +55,22 @@ export class TasksComponent {
     console.log(obj);
     this.tasks.push(obj);
     this.handleTaskCreation();
+    this.saveTasks();
+  }
+
+  // Method to load tasks from local storage or initialize with DummyTasks
+  loadTasks(): void {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+      this.tasks = JSON.parse(storedTasks);
+    } else {
+      this.tasks = DummyTasks; // Initialize with dummy tasks if no tasks are stored
+      this.saveTasks(); // Save the initial dummy tasks to local storage
+    }
+  }
+
+  // Method to save tasks to local storage
+  saveTasks(): void {
+    localStorage.setItem('tasks', JSON.stringify(this.tasks)); // Store tasks as a JSON string
   }
 }
