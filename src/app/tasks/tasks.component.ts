@@ -1,31 +1,29 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from "../../shared/user.model";
-import {TaskComponent} from "./task/task.component";
-import {DummyTasks} from "../../shared/dummy-tasks";
-import {NewTaskComponent} from "./new-task/new-task.component";
-import {Task} from "../../shared/task.model";
+import {User} from '../../shared/user.model'; // Import user model
+import {Task} from '../../shared/task.model'; // Import task model
+import {TaskComponent} from './task/task.component'; // Import task component
+import {NewTaskComponent} from './new-task/new-task.component'; // Import new task component
+import {DummyTasks} from '../../shared/dummy-tasks'; // Import dummy tasks data
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
   imports: [
     TaskComponent,
-    NewTaskComponent
+    NewTaskComponent // Import new task component for task creation
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
 export class TasksComponent implements OnInit {
+  // Input property for the user
   @Input({required: true}) user!: User;
-  newTaskCreate = false;
-  // tasks = DummyTasks;
+  newTaskCreate = false; // Boolean to toggle task creation form visibility
+  tasks = DummyTasks; // Array to store the list of tasks
 
-  // Array to store the list of tasks
-  tasks: Task[] = [];
-
-  // Lifecycle hook to perform component initialization
+  // Lifecycle hook for component initialization
   ngOnInit(): void {
-    this.loadTasks() // Load tasks from local storage or initialize with dummy tasks
+    this.loadTasks(); // Load tasks from local storage or initialize with dummy tasks
   }
 
   // Method to get tasks for the selected user
@@ -34,8 +32,9 @@ export class TasksComponent implements OnInit {
   }
 
   // Method to handle completed task removal
-  handleCompletedTask = (obj: object) => {
-    this.tasks = this.tasks.filter(task => task !== obj);
+  handleCompletedTask = (obj: Task) => {
+    this.tasks = this.tasks.filter(task => task !== obj); // Remove completed task from the list
+    this.saveTasks(); // Save the updated task list
   }
 
   // Method to toggle task creation state
@@ -50,12 +49,11 @@ export class TasksComponent implements OnInit {
 
   // Method to handle new task addition
   handleNewTask = (obj: Task) => {
-    obj.id = this.newTaskId();
-    obj.userId = this.user.id;
-    console.log(obj);
-    this.tasks.push(obj);
-    this.handleTaskCreation();
-    this.saveTasks();
+    obj.id = this.newTaskId(); // Assign a new ID to the task
+    obj.userId = this.user.id; // Assign user ID to the task
+    this.tasks.push(obj); // Add new task to the list
+    this.handleTaskCreation(); // Hide task creation form
+    this.saveTasks(); // Save the updated task list
   }
 
   // Method to load tasks from local storage or initialize with DummyTasks
@@ -64,7 +62,6 @@ export class TasksComponent implements OnInit {
     if (storedTasks) {
       this.tasks = JSON.parse(storedTasks);
     } else {
-      this.tasks = DummyTasks; // Initialize with dummy tasks if no tasks are stored
       this.saveTasks(); // Save the initial dummy tasks to local storage
     }
   }

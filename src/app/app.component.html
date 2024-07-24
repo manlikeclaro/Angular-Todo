@@ -2,6 +2,7 @@
 
 <main>
   <ul id="users">
+    <!-- Loop through each user and display a user component -->
     @for (user of users; track user.id) {
       <li class="mb-3">
         <app-user
@@ -13,9 +14,10 @@
     }
   </ul>
 
+  <!-- Conditionally render tasks or a fallback message -->
   @if (selectedUser != undefined) {
-    <app-tasks [user]="selectedUser!"/>
+    <app-tasks [user]="selectedUser!"/> <!-- Show tasks for the selected user -->
   } @else {
-    <h2 id="fallback">Select a user to view their tasks :)</h2>
+    <h2 id="fallback">Select a user to view their tasks :)</h2> <!-- Prompt to select a user -->
   }
 </main>

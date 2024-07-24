@@ -1,11 +1,14 @@
 @if (newTaskCreate) {
+  <!-- Show new task form when newTaskCreate is true -->
   <app-new-task (finished)="handleTaskCreation()" (added)="handleNewTask($event)"/>
 }
 
 <section id="tasks">
   <header>
+    <!-- Display user's name in the tasks section header -->
     <h2>{{ user.name }}'s Tasks</h2>
     <menu>
+      <!-- Button to toggle task creation form -->
       <button (click)="handleTaskCreation()">Add Task</button>
     </menu>
   </header>
@@ -13,7 +16,8 @@
   <ul>
     @for (task of selectedUserTasks; track task.id) {
       <li>
-        <app-task [task]="task" (complete)="handleCompletedTask($event) "></app-task>
+        <!-- Display task and handle completion -->
+        <app-task [task]="task" (complete)="handleCompletedTask($event)"></app-task>
       </li>
     }
   </ul>

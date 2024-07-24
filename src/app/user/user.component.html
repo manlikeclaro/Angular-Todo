@@ -1,6 +1,7 @@
 <div>
+  <!-- Button to display user information and handle click event -->
   <button [class.active]="selected" (click)="handleClick()">
-    <img [src]="getAvatar()" [alt]="user.name"/>
-    <span>{{ user.name }}</span>
+    <img [src]="getAvatar()" [alt]="user.name"/> <!-- Display user's avatar -->
+    <span>{{ user.name }}</span> <!-- Display user's name -->
   </button>
 </div>

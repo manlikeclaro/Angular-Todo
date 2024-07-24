@@ -1,10 +1,13 @@
 <div>
   <article>
+    <!-- Display task title -->
     <h2>{{ task.title }}</h2>
+    <!-- Display task due date, formatted using date pipe -->
     <time>{{ task.dueDate | date }}</time>
+    <!-- Display task summary -->
     <p>{{ task.summary }}</p>
     <p class="actions">
-      <button (click)="handleClick()">Complete</button>
+      <button (click)="handleClick()">Complete</button> <!-- Button to mark task as complete -->
     </p>
   </article>
 </div>
