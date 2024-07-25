@@ -5,8 +5,8 @@
   <h2>Add Task</h2>
   <form (ngSubmit)="handleSubmit(enteredTask)">
     <!-- Hidden fields to store task ID and user ID -->
-    <input hidden [(ngModel)]="enteredTask.id">
-    <input hidden [(ngModel)]="enteredTask.userId">
+    <input hidden name="id" [(ngModel)]="enteredTask.id">
+    <input hidden name="userId" [(ngModel)]="enteredTask.userId">
     <p>
       <!-- Task title input -->
       <label for="title">Title</label>

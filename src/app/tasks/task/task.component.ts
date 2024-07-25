@@ -12,13 +12,11 @@ import {DatePipe} from '@angular/common'; // Import DatePipe for date formatting
   styleUrl: './task.component.css'
 })
 export class TaskComponent {
-  // Input property for task data
-  @Input({required: true}) task!: Task;
-  // Event emitter for task completion
-  @Output() complete = new EventEmitter<Task>();
+  @Input({required: true}) task!: Task; // Input property for task data
+  @Output() complete = new EventEmitter<Task>(); // Event emitter for task completion
 
   // Method to handle button click and emit task completion event
   handleClick = () => {
-    this.complete.emit(this.task); // Emit the task to the parent component
+    this.complete.emit(this.task);
   }
 }

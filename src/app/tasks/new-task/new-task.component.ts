@@ -12,21 +12,20 @@ import {FormsModule} from '@angular/forms'; // Import forms module for ngModel
   styleUrl: './new-task.component.css'
 })
 export class NewTaskComponent {
-  // Event emitted when task creation is cancelled
-  @Output() finished = new EventEmitter<void>();
-  // Event emitted when a new task is added
-  @Output() added = new EventEmitter<Task>();
+  @Output() finished = new EventEmitter<void>(); // Emit event on task creation cancel
+  @Output() added = new EventEmitter<Task>(); // Emit event on new task addition
+
 
   // Initialize a new task with empty values
   enteredTask = new Task('', '', '', '', '');
 
-  // Method to handle click event on the backdrop or cancel button
+  // Emit finished event to close the dialog
   handleClick = () => {
-    this.finished.emit(); // Emit finished event to close the dialog
+    this.finished.emit();
   }
 
-  // Method to handle form submission
+  // Emit added event with the new task
   handleSubmit = (obj: Task) => {
-    this.added.emit(obj); // Emit added event with the new task
+    this.added.emit(obj);
   }
 }
