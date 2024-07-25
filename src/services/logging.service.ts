@@ -15,7 +15,7 @@ export class LoggingService {
   }
 
   // Log a task, tasks, or any object
-  logObject = (obj: Task | Task[] | {}) => {
+  logObject = (obj: {}[] | {}) => {
     console.log(`The object returned is: ${JSON.stringify(obj, null, 2)}`);
   }
 }

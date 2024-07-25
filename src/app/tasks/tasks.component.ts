@@ -14,7 +14,6 @@ import {TaskService} from "../../services/task.service";
     NewTaskComponent
   ],
   providers: [
-    LoggingService,
     TaskService
   ],
   templateUrl: './tasks.component.html',
@@ -52,6 +51,6 @@ export class TasksComponent implements OnInit {
     obj.userId = this.user.id; // Set the task's user ID
     this.taskService.addTask(obj); // Add the new task
     this.handleTaskCreation(); // Hide the task creation form
-    // this.loggingService.logObject(obj); // Log new task
+    this.loggingService.logObject(obj); // Log new task
   }
 }

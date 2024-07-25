@@ -6,7 +6,6 @@ import {UserService} from "../../services/user.service"; // Import user model
   selector: 'app-user',
   standalone: true,
   imports: [],
-  providers: [UserService],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })

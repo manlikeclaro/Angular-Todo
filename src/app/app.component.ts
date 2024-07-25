@@ -4,6 +4,7 @@ import {UserComponent} from './user/user.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {UserService} from "../services/user.service";
 import {User} from "../shared/user.model";
+import {LoggingService} from "../services/logging.service";
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import {User} from "../shared/user.model";
     TasksComponent
   ],
   providers: [
+    LoggingService,
     UserService
   ],
   templateUrl: './app.component.html',
@@ -23,7 +25,8 @@ export class AppComponent implements OnInit {
   identifiedUser!: User | undefined; // Placeholder for the selected user
 
   constructor(
-    private userService: UserService
+    private loggingService: LoggingService,
+    private userService: UserService,
   ) {
   }
 
