@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HeaderComponent} from './header/header.component';
 import {UserComponent} from './user/user.component';
-import {DummyUsers} from '../shared/dummy-users'; // Import dummy user data
 import {TasksComponent} from './tasks/tasks.component';
+import {UserService} from "../services/user.service";
+import {User} from "../shared/user.model";
 
 @Component({
   selector: 'app-root',
@@ -12,20 +13,36 @@ import {TasksComponent} from './tasks/tasks.component';
     UserComponent,
     TasksComponent
   ],
+  providers: [
+    UserService
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  users = DummyUsers; // Assign dummy users to the component
-  identifiedUser?: {}; // Placeholder for the selected user
+export class AppComponent implements OnInit {
+  identifiedUser!: User | undefined; // Placeholder for the selected user
+
+  constructor(
+    private userService: UserService
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.userService.loadUsers() // Initialize users from storage or defaults
+  }
+
+  // Get users from UserService
+  get users() {
+    return this.userService.getUsers();
+  }
 
   // Getter to find the currently selected user
   get selectedUser() {
-    return this.users.find(user => this.identifiedUser === user);
+    return this.userService.findUser(this.identifiedUser!);
   }
 
   // Method to handle user selection
-  onSelectUser = (obj: {}) => {
-    return this.identifiedUser = obj;
+  onSelectUser = (obj: User) => {
+    this.identifiedUser = obj;
   }
 }
