@@ -1,10 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../../shared/user.model';
-import {Task} from '../../shared/task.model';
-import {TaskComponent} from './task/task.component';
-import {NewTaskComponent} from './new-task/new-task.component';
-import {LoggingService} from "../../services/logging.service";
-import {TaskService} from "../../services/task.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { Task } from '../../shared/task.model';
+import { User } from '../../shared/user.model';
+import { NewTaskComponent } from './new-task/new-task.component';
+import { TaskComponent } from './task/task.component';
+import { LoggingService } from '../../services/logging.service';
+import { TaskService } from '../../services/task.service';
+
 
 @Component({
   selector: 'app-tasks',
